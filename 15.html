@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head> 
+    <title>Игра "Пятнашки"</title> 
+    <meta charset="utf-8"> 
+    <style>
+        #sample_timer, #steps {
+            display:none;
+            text-align:center;
+            color:#FFF;
+        }
+        
+        #btns {
+            text-align:center;
+        }
+    </style>
+    <script>
+    var m = 0;
+    function hod()
+    {
+        m++;
+        document.getElementById("steps").innerHTML = "Ходов:    " + m;
+    }
+    
+    function igra (ev)
+    {
+        var e = ev || window.event, o = e.target || e.srcElement;
+        if (o.tagName != 'INPUT') 
+            return;
+        var obj = document.getElementById('m15'), 
+            btn = obj.getElementsByTagName('input');
+        for (var sos = o.lang.split ('-'), j = k = 0, lj = sos.length; j < lj; j++)
+           if (btn [sos [j]].value < 0) {k = 1; break}
+        if (!k) return;
+        btn [sos [j]].style.visibility = 'visible'; 
+        btn [sos [j]].value = o.value;
+        o.style.visibility = 'hidden';
+        o.value = -1;
+        hod();
+        for (var j = 0; j < 15; j++) 
+            if (btn [j].value != j + 1) 
+                return;
+        obj.onclick = null; 
+        alert ('Головоломка решена!');
+    }
+    
+    function simple_timer(sec, block, direction) 
+    {
+        var time    = sec;
+        direction   = direction || false;
+                 
+        var hour    = parseInt(time / 3600);
+        if ( hour < 1 ) hour = 0;
+        time = parseInt(time - hour * 3600);
+        if ( hour < 10 ) hour = '0'+hour;
+     
+        var minutes = parseInt(time / 60);
+        if ( minutes < 1 ) minutes = 0;
+        time = parseInt(time - minutes * 60);
+        if ( minutes < 10 ) minutes = '0'+minutes;
+     
+        var seconds = time;
+        if ( seconds < 10 ) seconds = '0'+seconds;
+     
+        block.innerHTML ="Время игры: "+hour+':'+minutes+':'+seconds;
+     
+        if ( direction ) {sec++; setTimeout(function(){ simple_timer(sec, block, direction); }, 1000);} 
+        else {
+            sec--;
+            if ( sec > 0 ) {setTimeout(function(){ simple_timer(sec, block, direction); }, 1000);} 
+            else {alert('Время вышло!');}
+        }
+    }
+    
+    function start_timer() 
+    {
+        var block = document.getElementById('sample_timer');
+        simple_timer(0, block, true);
+    }
+        
+    function start_game()
+    {
+        start_timer();
+        document.getElementById('start').style.display = "none";
+        document.getElementById('reset').style.display = "block";
+        
+        document.getElementById('sample_timer').style.display = "block";
+        document.getElementById('steps').style.display = "block";
+        
+        (function ()
+        {
+            var shb = document.createElement ('input'); 
+            shb.type = 'button';
+            shb.style.cssText = 'height: 123px; width: 123px; font-weight: bold; font-size: 40px ';
+            for (var obj = document.getElementById('m15'), btn = new Array (), j = 0; j < 16; j++)
+            {
+                btn [j] = obj.appendChild(shb.cloneNode (1));
+                if (!((j + 1) % 4)) 
+                    obj.appendChild(document.createElement('br'));
+            }
+            btn [j - 1].style.visibility = 'hidden'; 
+            btn [j - 1].value = -1;
+            var rnd = new Array (), 
+                rsh = 1; 
+            obj.onclick = igra;
+            while (rsh % 2)
+            {
+                for (var j = 0; j < 15; j++) rnd [j] = j + 1;
+                rnd.sort (new Function ('x', 'y', 'return Math.random () - Math.random ()'));
+                for (var rsh = j = 0; j < 14; rsh += s, j++)
+                    for (var s = 0, k = j + 1; k < 15; k++) 
+                        if (rnd [k] < rnd [j]) 
+                            s++;
+            }
+            for (var j = 0; j < 16; j++)
+            {
+                if (j < 15) 
+                    btn [j].value = rnd [j];
+                var lng = new Array ();
+                if (j - 1 >= 0 && j % 4)       
+                    lng [lng.length] = j - 1;
+                    
+                if (j + 1 < 16 && (j + 1) % 4) 
+                    lng [lng.length] = j + 1;
+                    
+                if (j - 4 >= 0)                
+                    lng [lng.length] = j - 4;
+                    
+                if (j + 4 < 16)                
+                    lng [lng.length] = j + 4;
+                    
+                btn [j].lang = lng.sort ().join ('-');
+            }
+            
+        }) ();
+    }
+    </script> 
+</head> 
+<body bgcolor="#69f">
+    <center>
+        <button id="start" type="button" style="display:block" onClick="start_game();">Начать новую игру</button>
+        <button id="reset" type="button" style="display:none" onClick="location.reload();">Закончить игру</button>
+    </center>
+    <div id="sample_timer">00:00:00</div>   
+    <div id="steps"></div>
+    <center id="m15"></center>
+</body>
+</html>
