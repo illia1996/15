@@ -1,0 +1,95 @@
+
+
+body {
+    background-color: #003153;
+    margin: 0;
+    padding: 0;
+
+}
+
+#reset{
+    top: 15%;
+   // text-decoration: none !important;
+}
+#reset:hover{
+    cursor: url(../git.png), pointer;
+}
+.transparent {
+    color: transparent !important;
+    border: solid 0px gray !important;
+    padding: 0px;
+    margin: 15px !important;
+    width: 70%;
+    padding-bottom: 2px !important;
+
+}
+
+div .col-xs-3 {
+    font-family: Geneva, Arial, Helvetica, sans-serif;
+    vertical-align: middle;
+}
+
+
+
+
+#box div .col-xs-3 {
+    border: solid 1px gray;
+    font-size: 40px;
+    color: black;
+}
+
+#box div .col-xs-3:hover {
+    color: white;
+    cursor: hand;
+}
+
+.noselect {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.cv {
+    padding: 0px;
+    margin: 10px !important;
+    width: 70%;
+}
+
+.container {
+    padding-left: 3%;
+    padding-right: 3%;
+    width: auto !important;
+}
+
+.row {
+    text-align: center;
+}
+
+.pad {
+    width: 70px;
+    padding: 0px;
+}
+
+.margin {
+    margin-top: 10px;
+}
+
+a {
+    position: absolute;
+    top: 35%;
+    left: 60%;
+    transform: translate(-50%, -50%); 
+    width: 120px;
+    height: 25px;
+    background: #0095B6;
+    text-align: center;
+    line-height: 20px;
+    color: #000000;
+  
+  
+}
+
+
+
